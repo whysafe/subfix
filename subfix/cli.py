@@ -56,7 +56,8 @@ def _write(cues: list[Cue], path: Path, args, src_fmt: str, used_enc: str) -> No
     target.write_bytes(text.encode(args.out_encoding))
     same = used_enc.replace("-sig", "") == args.out_encoding.lower().replace("_", "-")
     note = "" if same else f", кодировка {used_enc} -> {args.out_encoding}"
-    print(f"{path.name} -> {target}  ({plural(len(cues), "субтитр", "субтитра", "субтитров")}{note})", file=sys.stderr)
+    count = plural(len(cues), "субтитр", "субтитра", "субтитров")
+    print(f"{path.name} -> {target}  ({count}{note})", file=sys.stderr)
 
 
 def _sync_point(text: str, cues: list[Cue]) -> ops.SyncPoint:
